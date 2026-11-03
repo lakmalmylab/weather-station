@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>{{ site_title }}</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>{{ site_title }}</h1>
+      <div class="controls">
+        <label class="sr-only" for="station">Station</label>
+        <select id="station">
+{{ city_options }}
+        </select>
+        <div class="toggle" role="group" aria-label="Temperature unit">
+          <button type="button" data-unit="C" aria-pressed="true">°C</button>
+          <button type="button" data-unit="F" aria-pressed="false">°F</button>
+        </div>
+      </div>
+    </header>
+
+    <p id="error" class="error" role="alert" hidden></p>
+
+    <section class="card current" aria-live="polite">
+      <div class="hero">
+        <div id="temp" class="temp">--</div>
+        <div id="desc" class="desc">Loading…</div>
+      </div>
+      <dl class="grid">
+        <div><dt>Feels like</dt><dd id="feels">--</dd></div>
+        <div><dt>Wind</dt><dd id="wind">--</dd></div>
+        <div><dt>Pressure</dt><dd id="pressure">--</dd></div>
+        <div class="wide">
+          <dt>Humidity</dt>
+          <dd><span id="humidity">--</span>
+            <span class="bar"><span id="humidity-bar"></span></span></dd>
+        </div>
+      </dl>
+      <p class="muted">Measured: <span id="time">--</span></p>
+    </section>
+
+    <section class="card">
+      <h2>Next 24 hours</h2>
+      <div id="chart" class="chart" aria-label="24-hour temperature chart"></div>
+    </section>
+
+    <footer class="muted">
+      Data: <a href="https://open-meteo.com/">Open-Meteo</a> · Build {{ build_id }}
+    </footer>
+  </main>
+
+  <script id="cities-data" type="application/json">{{ cities_json }}</script>
+  <script src="app.js"></script>
+</body>
+</html>
