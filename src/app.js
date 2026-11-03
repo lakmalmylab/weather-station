@@ -80,6 +80,23 @@
     $("chart").innerHTML = out + "</svg>";
   }
 
+  function stationZone() {
+    var zone = state.data && state.data.timezone;
+    if (zone) {
+      try { new Intl.DateTimeFormat("en-GB", { timeZone: zone }); return zone; } catch (e) { /* fall through */ }
+    }
+    return undefined; // browser time zone
+  }
+
+  function tickClock() {
+    var now = new Date(), zone = stationZone();
+    var fmt = function (opts) { opts.timeZone = zone; return new Intl.DateTimeFormat("en-GB", opts).format(now); };
+    $("clock-time").textContent = fmt({ hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23" });
+    $("clock-date").textContent = fmt({ weekday: "long", day: "numeric", month: "long", year: "numeric" });
+    $("clock-zone").textContent = (zone || Intl.DateTimeFormat().resolvedOptions().timeZone) + " · " +
+      fmt({ timeZoneName: "long" }).split(", ").pop();
+  }
+
   function load() {
     var city = cities[Number($("station").value)];
     var params = new URLSearchParams({
@@ -118,6 +135,8 @@
     });
   });
 
+  tickClock();
+  setInterval(tickClock, 1000);
   load();
   setInterval(load, REFRESH_MS);
 })();

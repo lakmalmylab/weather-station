@@ -28,6 +28,16 @@ select, .toggle button {
 .toggle button:last-child { border-radius: 0 8px 8px 0; border-left: 0; }
 .toggle button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-top: 16px; }
+.current { display: flex; flex-direction: column; gap: 16px; }
+.details { flex: 1; min-width: 0; }
+.clock { text-align: left; border-top: 1px solid var(--line); padding-top: 16px; }
+.clock-label { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.clock-time { font-size: 2.2rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.clock-date, .clock-zone { color: var(--muted); font-size: .9rem; }
+@media (min-width: 600px) {
+  .current { flex-direction: row; }
+  .clock { text-align: right; border-top: 0; padding-top: 0; min-width: 190px; }
+}
 .hero { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; }
 .temp { font-size: 3.5rem; font-weight: 700; line-height: 1; }
 .desc { font-size: 1.2rem; color: var(--muted); }

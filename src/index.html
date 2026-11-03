@@ -25,7 +25,8 @@
 
     <p id="error" class="error" role="alert" hidden></p>
 
-    <section class="card current" aria-live="polite">
+    <section class="card current">
+     <div class="details" aria-live="polite">
       <div class="hero">
         <div id="temp" class="temp">--</div>
         <div id="desc" class="desc">Loading…</div>
@@ -41,6 +42,13 @@
         </div>
       </dl>
       <p class="muted">Measured: <span id="time">--</span></p>
+     </div>
+     <aside class="clock" aria-label="Local time">
+       <div class="clock-label">Local time</div>
+       <div id="clock-time" class="clock-time">--:--:--</div>
+       <div id="clock-date" class="clock-date"></div>
+       <div id="clock-zone" class="clock-zone"></div>
+     </aside>
     </section>
 
     <section class="card">
